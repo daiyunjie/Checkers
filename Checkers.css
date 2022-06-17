@@ -1,0 +1,30 @@
+.row {
+    display: table-row;
+    margin: 0;
+    padding: 0;
+}
+
+.bblack,
+.bwhite {
+    display: table-cell;
+    border-color: #000000;
+    border-width: 1px;
+    border-style: solid;
+    width: 70px;
+    height: 70px;
+    margin: 0;
+    padding: 0;
+}
+
+.bblack {
+    background-color: #F4A460;
+}
+
+.bwhite {
+    background-color: #F5DEB3;
+}
+
+.piece {
+    margin-left: 4px;
+    margin-top: 4px;
+}
