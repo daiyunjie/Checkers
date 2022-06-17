@@ -1,0 +1,2 @@
+# Checkers
+JS project
