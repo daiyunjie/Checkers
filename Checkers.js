@@ -29,8 +29,6 @@ function createBoard() {
             }
             square.setAttribute("draggable", "false");
             row.appendChild(square);
-            square.setAttribute("draggable", "false");
-            row.appendChild(square);
         }
     }
 }
