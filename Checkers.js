@@ -123,3 +123,71 @@ function dragEnter(e) {
 function dragLeave(e) {
     e.target.classList.remove('drop');
 }
+
+function isValidMove(source, target, drop) {
+    const startPos = source.id.substr(1, 2);
+    const prefix = source.id.substr(0, 1);
+    let endPos = target.id;
+    if (endPos.length > 2) {
+        endPos = endPos.substr(1, 2);
+    }
+    // Ви не можете потрапити на існуюче місце
+    if (startPos === endPos) {
+        return false;
+    }
+    // Ви не можете потрапити на окуповану площу
+    if (target.childElementCount !== 0) {
+        return false;
+    }
+
+    let jumpOnly = false;
+    if (source.classList.contains('jumpOnly')) {
+        jumpOnly = true;
+    }
+    const xStart = parseInt(startPos.substr(0, 1));
+    const yStart = parseInt(startPos.substr(1, 1));
+    const xEnd = parseInt(endPos.substr(0, 1));
+    const yEnd = parseInt(endPos.substr(1, 1));
+    switch (prefix) {
+        // For white pieces
+        case 'w':
+            if (yEnd <= yStart)
+                return false; 
+            break;
+            // For black pieces
+        case 'b':
+            if (yEnd >= yStart)
+                return false; 
+            break;
+    }
+    if (yStart === yEnd || xStart === xEnd)
+        return false; 
+    // Не вдається перемістити більше двох пробілів
+    if (Math.abs(yEnd - yStart) > 2 || Math.abs(xEnd - xStart) > 2)
+        return false;
+    if (Math.abs(xEnd - xStart) === 1 && jumpOnly)
+        return false;
+    let jumped = false;
+    if (Math.abs(xEnd - xStart) === 2) {
+        const pos = ((xStart + xEnd) / 2).toString() +
+            ((yStart + yEnd) / 2).toString();
+        const div = document.getElementById(pos);
+        if (div.childElementCount === 0)
+            return false; 
+        const img = div.children[0];
+        if (img.id.substr(0, 1).toLowerCase() === prefix.toLowerCase())
+            return false; 
+        if (drop) {
+            div.removeChild(img);
+            jumped = true;
+        }
+    }
+    if (drop) {
+        enableNextPlayer(source);
+        if (jumped) {
+            source.draggable = true;
+            source.classList.add('jumpOnly'); 
+        }
+    }
+    return true;
+}
