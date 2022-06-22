@@ -191,3 +191,30 @@ function isValidMove(source, target, drop) {
     }
     return true;
 }
+
+function kingMe(piece) {
+    // Якщо ми вже король, просто поверніться
+    if (piece.id.substr(0, 1) === 'W' || piece.id.substr(0, 1) === 'B')
+        return;
+
+    let newPiece = '';
+    if (piece.id.substr(0, 1) === 'w' && piece.id.substr(2, 1) === '7') {
+        newPiece = document.createElement('img');
+        newPiece.src = './Images/whiteKing.png';
+        newPiece.id = 'W' + piece.id.substr(1, 2);
+    }
+    if (piece.id.substr(0, 1) === 'b' && piece.id.substr(2, 1) === '0') {
+        newPiece = document.createElement('img');
+        newPiece.src = './Images/blackKing.png';
+        newPiece.id = 'B' + piece.id.substr(1, 2);
+    }
+    if (newPiece) {
+        newPiece.draggable = true;
+        newPiece.classList.add('piece');
+        newPiece.addEventListener('dragstart', dragStart, false);
+        newPiece.addEventListener('dragend', dragEnd, false);
+        const parent = piece.parentNode;
+        parent.removeChild(piece);
+        parent.appendChild(newPiece);
+    }
+}
