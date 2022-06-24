@@ -218,3 +218,21 @@ function kingMe(piece) {
         parent.appendChild(newPiece);
     }
 }
+
+function enableNextPlayer(piece) {
+    const pieces = document.querySelectorAll('img');
+    let i = 0;
+    while (i < pieces.length) {
+        const p = pieces[i++];
+        p.draggable = p.id.substr(0, 1).toUpperCase() !== piece.id.substr(0, 1).toUpperCase();
+        p.classList.remove('jumpOnly');
+    }
+}
+
+function resetGame() {
+    const rG = document.getElementById('resetGame');
+    rG.onclick = function() {
+        return location.reload();
+    };
+}
+resetGame();
