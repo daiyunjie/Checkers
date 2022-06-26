@@ -10,8 +10,8 @@
     border-color: #000000;
     border-width: 1px;
     border-style: solid;
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     margin: 0;
     padding: 0;
 }
@@ -27,4 +27,16 @@
 .piece {
     margin-left: 4px;
     margin-top: 4px;
+}
+
+#resetGame {
+    background-color: #070c07;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
